@@ -1,6 +1,7 @@
-import { data } from 'autoprefixer';
+
 import React, { useState } from 'react'
 import {Link} from 'react-router-dom'
+
 
 function SignUp() {
 
@@ -30,8 +31,8 @@ function SignUp() {
           body: JSON.stringify(formData)
          })
         const data = await res.json()
-        if(data.success == false){
-          setmessage({success:null,message:''})
+        if(data.success){
+          setmessage({success:data.success,message:data.message})
         }
         setmessage(data)
         setloading(false)
@@ -47,7 +48,7 @@ function SignUp() {
 
   return (
     <div className='signUp mx-auto max-w-md '>
-      <h1 className=' text-4xl text-center mt-10 text-slate-700 font-[800]'>SignIn</h1>
+      <h1 className=' text-4xl text-center mt-10 text-slate-700 font-[800]'>SignUp</h1>
       <form className='flex flex-col p-5 gap-5' onSubmit={handleSubmit} >
         <input type="text"
          required={true} 
@@ -90,7 +91,7 @@ function SignUp() {
         <span className='text-slate-500 font-[800]'>SignIn</span>
       </Link>
      </div>
-     {message.success == true? <p className='text-green-800 font-[600]'>{message.message}</p> :<p className='text-red-800 font-[600]'>{message.message}</p>}
+     {message.success? <p className='text-green-800 font-[600]'>{message.message}</p> :<p className='text-red-800 font-[600]'>{message.message}</p>}
      {/* {data&& <p className='text-green-800 font-[600]'>{data}</p> } */}
     </div>
   )
