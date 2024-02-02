@@ -1,5 +1,7 @@
 import User from "../modals/userModal.js"
 import bcryptjs from 'bcryptjs'
+import { errorhandler } from "../utils/error.js"
+import jwt from "jsonwebtoken"
 
 export const signUp = async(req,res,next)=>{
     const {username,email,password} = req.body
@@ -12,4 +14,22 @@ export const signUp = async(req,res,next)=>{
         next(error)
     }
  }
- 
+
+ export const signIn = async(req,res,next)=>{
+    try {
+        const {username,password} = req.body
+        const validuser = await User.findOne({ username })
+        if(!validuser)return next(errorhandler(400,'User not found'))
+        const validpassword = bcryptjs.compareSync(password,validuser.password)
+        if(!validpassword) return next(errorhandler(401,'Wrong Credentials!'))
+        const token = jwt.sign({id : validuser._id},process.env.JWTSECRET);
+        const{password:pass , ...rest} = validuser._doc;
+        res 
+            .cookie('access_token',token,{httpOnly : true})
+            .status(200)
+            .json(rest)
+
+    } catch (error) {
+        next(error)
+    }
+ }
