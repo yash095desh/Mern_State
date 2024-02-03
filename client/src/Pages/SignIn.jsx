@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import {Link , useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { signInFailure, signInStart, signInSuccess } from '../redux/user/UserSlice';
+import OAuth from '../Components/OAuth';
 
 
 function SignIn() {
@@ -73,6 +74,7 @@ function SignIn() {
          className='p-3 bg-slate-700 text-white rounded-lg hover:opacity-90 disabled:opacity-90'
          disabled = {loading}
           >{loading?'Loading...':'SignIn'}</button>
+      <OAuth/>
       </form>
      <div className='flex p-5 '>
       <p>Dont Have an account?</p>

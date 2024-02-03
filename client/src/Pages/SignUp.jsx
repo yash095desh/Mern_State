@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react'
 import {Link} from 'react-router-dom'
+import OAuth from '../Components/OAuth';
 
 
 function SignUp() {
@@ -84,6 +85,7 @@ function SignUp() {
          className='p-3 bg-slate-700 text-white rounded-lg hover:opacity-90 disabled:opacity-90'
          disabled = {loading}
           >{loading?'Loading...':'SignUp'}</button>
+      <OAuth/>
       </form>
      <div className='flex p-5 '>
       <p>Already Have an account?</p>
