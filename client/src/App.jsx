@@ -6,16 +6,19 @@ import About from './Pages/About'
 import SignIn from './Pages/SignIn'
 import SignUp from './Pages/SignUp'
 import Layout from './Layout'
+import Privatepage from './Components/Privatepage'
 function App() {
   return (
     <BrowserRouter>
     <Routes>
-      <Route path='/' element={<Layout/>}>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/about' element={<About/>}/>
-      <Route path='/profile' element={<Profile/>}/>
-      <Route path='/signIn' element={<SignIn/>}/>
-      <Route path='/signUp' element={<SignUp/>}/>
+      <Route  element={<Layout/>}>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/about' element={<About/>}/>
+          <Route path='/signIn' element={<SignIn/>}/>
+          <Route path='/signUp' element={<SignUp/>}/>
+          <Route element={<Privatepage/>} >
+              <Route path='/profile' element={<Profile/>}/>
+          </Route>
       </Route>
     </Routes>
     </BrowserRouter>
