@@ -7,7 +7,7 @@ export const test =(req,res)=>{
 }
 
 export const updateUser = async(req,res,next)=>{
-    if(!req.user == req.params.id) return next(errorhandler(401,"You can only update your own account"))
+    if(req.user.id !== req.params.id) return next(errorhandler(401,"You can only update your own account"))
 
     try {
         if(req.body.password){
@@ -28,5 +28,36 @@ export const updateUser = async(req,res,next)=>{
             .json(rest)
     } catch (error) {
         next(error)
+    }
+}
+
+export const deleteUser = async(req,res,next)=>{
+    if(req.user.id !== req.params.id) return next(errorhandler(401,"You can make changes only in your account"))
+
+    try {
+        const response = await User.findByIdAndDelete(req.params.id)
+        const para = JSON.stringify(req.params)
+        res.clearCookie('access_token');
+        res 
+            .status(200)
+            .json(`User has been deleted`)
+
+    } catch (error) {
+        next(error)
+        console.log(error)
+    }
+}
+
+export const signOut = async (req,res,next)=>{
+    if(req.user.id !== req.params.id)return next(errorhandler(401,"You cant signout others account"))
+
+    try {
+        res.clearCookie('access_token')
+        res
+            .status(200)
+            .json('Successfully signOut')
+        
+    } catch (error) {
+        next(errorhandler(error))
     }
 }
