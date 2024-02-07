@@ -24,7 +24,7 @@ function Header() {
         <li className='text-slate-700 hidden sm:inline hover:underline'>About</li>
         </Link>
         <Link to='/profile'>
-      {currentUser?(<img src={currentUser.avatar} alt="profile" className='rounded-full h-[50px]' /> ):  (<li className='text-slate-700 hidden sm:inline hover:underline'>SignIn</li>)}
+      {currentUser?(<img src={currentUser.avatar} alt="profile" className='rounded-full h-[50px] my-3' /> ):  (<li className='text-slate-700 hidden sm:inline hover:underline'>SignIn</li>)}
       
         </Link>
       </ul>

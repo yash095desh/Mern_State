@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import {Link} from 'react-router-dom'
 import 
 { updateStart,
   updateFailure,
@@ -117,7 +118,12 @@ function Profile() {
         className='p-3 my-2 rounded-md outline-none'
         onChange={handleChange}
          />
-      <button className='p-3 my-2 rounded-md outline-none bg-red-800 text-white'>{loading?'...Loading':'Update'}</button>
+      <button className='p-3 my-2 rounded-md outline-none bg-slate-800 text-white hover:opacity-90'>{loading?'...Loading':'Update'}</button>
+      <Link className='bg-green-800 p-3 text-white rounded-md my-2 text-center hover:opacity-90'
+        to={'/createListing'}
+      >
+      Create Listing
+      </Link>
       <div className='flex justify-between text-red-600 font-[800]  my-3 ' >
 
         <span className='cursor-pointer'
