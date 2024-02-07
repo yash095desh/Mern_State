@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 function Header() {
   const currentUser = useSelector((state)=>state.user.currentuser)
   return (
-    <div className='header flex flex-col sm:flex-row bg-slate-200 p-5 justify-around items-center shadow-md'>
+    <div className='header flex flex-col sm:flex-row bg-slate-200  justify-around items-center shadow-md'>
       <div className="header_logo flex text-[22px] font-[800]">
         <span className='text-slate-500'>Sahand</span>
         <span className='text-slate-700'>Estate</span>

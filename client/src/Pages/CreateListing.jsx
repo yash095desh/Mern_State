@@ -6,11 +6,17 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function CreateListing() {
+  const navigate = useNavigate()  
+  const {currentuser} = useSelector((state)=>(state.user))
   const [files, setFiles] = useState([]);
   const [Uploading,setUploading] = useState(false)
   const [imgUploadErr,setImgUploadErr] = useState(false)
+  const [loading,setloading] = useState(false)
+  const [error,setError] = useState(false)
   const [formData, setFormData] = useState({
     imageUrls: [],
     name: "",
@@ -94,19 +100,48 @@ function CreateListing() {
         setFormData((prev)=>({...prev, [e.target.id] : e.target.value}))
     }
 
-    console.log(formData)
+  }
+  const handleSubmit = async(e)=>{
+    e.preventDefault();
+    if(formData.imageUrls.length<1)return setError('You need to upload atlest 1 image')
+    console.log(formData.regularPrice ,formData.discountedPrice)
+    if(+formData.regularPrice < +formData.discountedPrice)return setError('discount cant be greater than orignal price')
+   try {
+    setloading(true)
+    setError(false)
+    const res = await fetch('/api/listing/create',{
+        method : "POST",
+        headers : {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            ...formData, userRef : currentuser._id
+        })
+    })
+    const data = await res.json()
+    if(data.success == false) {
+        setError(data.message)
+    }
+    console.log(data)
+    navigate(`/listing/${data._id}`)
+    setloading(false)
+   } catch (error) {
+    setError(error)
+    setloading(false)
+   }
   }
 
   return (
     <div className="px-5 m-auto my-10">
       <h1 className="text-4xl font-[900] text-center">Create a Listing</h1>
-      <form action="">
+      <form onSubmit={handleSubmit} >
         <div className=" md:flex md:flex-1 md:justify-around ">
           <div className="">
             <div className="flex flex-col mt-5">
               <input
                 type="text"
                 id="name"
+                required
                 minLength='10'
                 maxLength='60'
                 className="p-2 my-2 outline-none rounded-md"
@@ -117,6 +152,7 @@ function CreateListing() {
               <textarea
                 id="description"
                 rows="3"
+                required
                 className="p-2 my-2 outline-none rounded-md"
                 placeholder="Description"
                 onChange={handleChange}
@@ -125,6 +161,7 @@ function CreateListing() {
               <input
                 type="text"
                 id="address"
+                required
                 className="p-2 my-2 outline-none rounded-md"
                 placeholder="Address"
                 onChange={handleChange}
@@ -275,10 +312,13 @@ function CreateListing() {
                     </div>
                 )
             })}
-            <button disabled={Uploading} className="bg-slate-700 p-3 text-white  rounded-md my-3 hover:opacity-90 disabled:opacity-80">
-              Create Listing
+            <button 
+            disabled={Uploading}
+             className="bg-slate-700 p-3 text-white  rounded-md my-3 hover:opacity-90 disabled:opacity-80"
+             >
+              {loading?'Creating...':'Create Listing'}
             </button>
-            
+            {error && <p className="text-red-600 font-[600]">{error}</p> }
           </div>
         </div>
       </form>

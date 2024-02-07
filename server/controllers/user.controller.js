@@ -1,4 +1,5 @@
 import User from "../modals/userModal.js"
+import Listing from "../modals/listingModel.js"
 import { errorhandler } from "../utils/error.js"
 import bcryptjs from 'bcryptjs'
 
@@ -59,5 +60,17 @@ export const signOut = async (req,res,next)=>{
         
     } catch (error) {
         next(errorhandler(error))
+    }
+}
+
+export const showlisting = async(req,res,next)=>{
+    if(req.user.id !== req.params.id)return next(errorhandler(401),"Unauthrised")
+
+    try {
+        const result = await Listing.find({ userRef : req.params.id })
+        res.status(200).json(result)
+
+    } catch (error) {
+        next(error)
     }
 }

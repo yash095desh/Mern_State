@@ -13,6 +13,8 @@ function Profile() {
   const fileRef = useRef(null)
   const [formData , setformData] =useState({})
   const [message,setmessage]=useState({error:null,message:''})
+  const [listings,setlistings] = useState([])
+  const [listingShown,setlistingShown] = useState(false)
   const {currentuser,loading,error} = useSelector((state)=> state.user)
   const dispatch = useDispatch()
 
@@ -81,11 +83,22 @@ function Profile() {
       dispatch(deleteFailure(error))
     }
   }
-
+  const showListing = async(e)=>{
+    try {
+      const res = await fetch(`/api/user/listing/${currentuser._id}`)
+      const data = await res.json()
+      console.log(data)
+      setlistings(data)
+      setlistingShown((prev)=>!prev)
+      console.log(listingShown)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div >
-      <form className='Profile flex flex-col max-w-lg m-auto mt-10 px-2' onSubmit={handleSubmit} >
+      <form className='Profile flex flex-col max-w-lg m-auto my-10 px-2' onSubmit={handleSubmit} >
         <input type="file" accept='image/*'  id="profile" className='hidden'
           ref={fileRef} onChange={uploadFile}
          />
@@ -142,7 +155,31 @@ function Profile() {
       
       {error && <p className='text-red-600 font-[600]'>{error}</p> } 
       {error == false &&<p className='text-green-600 font-[600]'>Updated Successfully</p> }
+      <p 
+      className='  text-green-600 hover:opacity-90 mx-auto font-[800] cursor-pointer mt-5'
+      onClick={showListing}
+      >  {listingShown?'Hide Listing':'Show Listing'}</p>
+
       </form>
+      {listingShown && 
+      listings.map((listing)=>{
+        return (
+          <div
+           className='flex flex-col sm:flex-row justify-between p-3 border-2 m-2 items-center max-w-3xl mx-auto rounded-xl flex-1' 
+          key={listing._id} id='listing'>
+            <div className="flex items-center gap-4">
+            <img src={listing.imageUrls[0]} alt="listingImg" className='w-20 h-20 object-contain' />
+            <div className=" truncate font-[600]">
+              {listing.name}
+            </div>
+            </div>
+            <div className="flex gap-4 font-[600]">
+              <span className='text-green-800 cursor-pointer'>Edit</span>
+              <span className='text-red-800 cursor-pointer'>Delete</span>
+            </div>
+          </div>
+        )
+      })}
     </div>
   )
 }
