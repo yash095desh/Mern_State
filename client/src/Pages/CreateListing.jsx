@@ -44,11 +44,10 @@ function CreateListing() {
       .then((urls) => {
         setFormData((prev) => ({ ...prev, imageUrls: prev.imageUrls.concat(urls) }));
         setUploading(false)
-        console.log(formData.imageUrls)
       })
       .catch((error)=>{
         setUploading(false)
-        setImgUploadErr(error)
+        setImgUploadErr('Image upload failed (2mb max per image)')
       })
     } else {
       setImgUploadErr('You can only upload 6 images')

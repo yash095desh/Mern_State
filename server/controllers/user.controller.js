@@ -74,3 +74,14 @@ export const showlisting = async(req,res,next)=>{
         next(error)
     }
 }
+
+export const getUser = async(req,res,next)=>{
+    try {
+        const result = await User.findById(req.params.id)
+        const {password:pass,...rest} = result._doc
+        res.status(200).json(rest)
+    } catch (error) {
+        next(error)
+    }
+
+}
