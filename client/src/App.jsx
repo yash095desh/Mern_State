@@ -8,6 +8,8 @@ import SignUp from './Pages/SignUp'
 import Layout from './Layout'
 import Privatepage from './Components/Privatepage'
 import CreateListing from './Pages/CreateListing'
+import UpdateListing from './Pages/UpdateListing'
+import Listing from './Pages/Listing'
 function App() {
   return (
     <BrowserRouter>
@@ -17,9 +19,11 @@ function App() {
           <Route path='/about' element={<About/>}/>
           <Route path='/signIn' element={<SignIn/>}/>
           <Route path='/signUp' element={<SignUp/>}/>
+          <Route path='/listing/:id' element={<Listing/>}/>
           <Route element={<Privatepage/>} >
               <Route path='/profile' element={<Profile/>}/>
               <Route path='/createListing' element={<CreateListing/>}/>
+              <Route path='/editListing/:id' element={<UpdateListing/>} />
           </Route>
       </Route>
     </Routes>
