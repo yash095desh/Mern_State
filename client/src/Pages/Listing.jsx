@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
-import { FaBath, FaBed, FaChair, FaMapMarkerAlt, FaParking } from "react-icons/fa";
+import { FaBath, FaBed, FaChair, FaMapMarkerAlt, FaParking, FaShare } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import User from "../../../server/modals/userModal";
 import Contact from "../Components/Contact";
@@ -17,6 +17,7 @@ function Listing() {
   const [loading, setloading] = useState(false);
   const {currentuser} = useSelector((state)=> state.user)
   const [contact ,setcontact] = useState(false)
+  const [copied,setcopied] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,6 +58,17 @@ function Listing() {
               </SwiperSlide>
             ))}
           </Swiper>
+          <div className="bg-slate-100 flex text-slate-500 fixed top-[13%] right-[10%] cursor-pointer justify-center w-12 h-12 rounded-full z-10 items-center ">
+            <FaShare
+            onClick={()=>{
+                navigator.clipboard.writeText(window.location.href)
+                setcopied(true)
+                setTimeout(()=>(setcopied(false)),2000)
+            }}
+            />
+            {copied && 
+            <p className="text-slate-700 font-[800] fixed top-[22%] right-[8%] z-10 " >link Copied </p> }
+          </div>
          <div className="mx-10">
          <h1 className="text-xl  sm:text-3xl  font-[800] my-10">
             {listing.name} - ${listing.regularPrice}

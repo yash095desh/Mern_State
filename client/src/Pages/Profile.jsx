@@ -87,10 +87,11 @@ function Profile() {
     try {
       const res = await fetch(`/api/user/listing/${currentuser._id}`)
       const data = await res.json()
-      console.log(data)
+      if(data.success == false){
+        return dispatch(deleteFailure(data.message))
+      }
       setlistings(data)
       setlistingShown((prev)=>!prev)
-      console.log(listingShown)
     } catch (error) {
       console.log(error)
     }
