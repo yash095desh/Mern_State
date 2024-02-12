@@ -26,7 +26,7 @@ function Header() {
   },[location.search])
 
   return (
-    <div className='header flex flex-col sm:flex-row bg-slate-200  justify-around items-center shadow-md'>
+    <div className='header flex flex-col sm:flex-row bg-slate-200 py-10 justify-around items-center shadow-md'>
       <div className="header_logo flex text-[22px] font-[800]">
         <span className='text-slate-500'>Sahand</span>
         <span className='text-slate-700'>Estate</span>
