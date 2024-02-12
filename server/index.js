@@ -5,6 +5,7 @@ import userRoute from './Routes/userRoutes.js'
 import authRoute from './Routes/authRoute.js'
 import listingRoute from './Routes/listingRoute.js'
 import cookieParser from 'cookie-parser'
+import path from 'path'
 dotenv.config()
 
 const app = express()
@@ -15,14 +16,18 @@ mongoose.connect(process.env.MONGO)
 .then(()=>{console.log('server successfully connected!')})
 .catch((err)=>{console.log(err)})
 
+const __dirname = path.resolve()
+
 app.use(cookieParser())
 
 app.use('/api/user',userRoute)
 app.use('/api/auth',authRoute)
 app.use('/api/listing',listingRoute)
 
-app.get('/',(req,res)=>{
-    res.status(201).send('Hello')
+app.use(express.static(path.join(__dirname,'../client/dist')))
+
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'client','dist','index.html'))
 })
 
 
