@@ -6,7 +6,6 @@ import { Navigation } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 import { FaBath, FaBed, FaChair, FaMapMarkerAlt, FaParking, FaShare } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import User from "../../../server/modals/userModal";
 import Contact from "../Components/Contact";
 
 function Listing() {
