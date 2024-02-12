@@ -127,7 +127,7 @@ function Search() {
   }
   return (
     <div className="flex flex-col md:flex-row ">
-      <div className="p-7  border-b-2 md: border-r-2 md:h-screen">
+      <div className="p-7  border-b-2 md: border-r-2 md:min-h-screen">
         <form className="flex flex-col gap-4 " onSubmit={handleSubmit}>
           <div className="flex  flex-col gap-4 items-center sm:flex-row">
             <label className="font-semibold whitespace-nowrap">
@@ -227,17 +227,17 @@ function Search() {
           </button>
         </form>
       </div>
-      <div className="">
+      <div className="p-5">
       {loading && <p className="text-lg font-bold m-5">Loading..</p>}
       {!loading && listing.length < 1 && <p className="text-lg font-bold m-5">No Listings Found </p>}
-      <div className="flex flex-wrap">
-      {listing && listing.map((listing)=>{
+      <div className="flex flex-wrap gap-6">
+      {listing && !loading && listing.map((listing)=>{
         return <ListingCard key={listing._id} listing={listing}/>
       })}
       </div>
       {showMore && !loading &&
        <p
-        className="text-green-500 font-semibold text-center hover:underline cursor-pointer"
+        className="text-green-500 font-semibold text-center hover:underline cursor-pointer p-4"
         onClick={showMorelisting} >Show More</p> }
       </div>
     </div>
