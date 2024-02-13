@@ -23,7 +23,7 @@ function Listing() {
       try {
         setloading(true);
         const fetchId = Params.id;
-        const res = await fetch(`https://mern-estate10.onrender.com/api/listing/getlisting/${fetchId}`);
+        const res = await fetch(`https://mern-estate-sy31.onrender.com/api/listing/getlisting/${fetchId}`);
         const data = await res.json();
         if (!data.success) {
           setError(data.message);

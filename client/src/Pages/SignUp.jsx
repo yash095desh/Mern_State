@@ -24,7 +24,7 @@ function SignUp() {
        try {
           setloading(true)
           setmessage({success:null,message:''})
-          const res = await fetch('https://mern-estate10.onrender.com/api/auth/signUp',{
+          const res = await fetch('https://mern-estate-sy31.onrender.com/api/auth/signUp',{
           method : 'POST',
           headers : {
             'Content-Type': 'application/json',

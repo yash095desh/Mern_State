@@ -35,7 +35,7 @@ function CreateListing() {
   useEffect(()=>{
    const fetchData = async()=>{
     const fetchId = Params.id
-    const res = await fetch(`https://mern-estate10.onrender.com/api/listing/getlisting/${fetchId}`)
+    const res = await fetch(`https://mern-estate-sy31.onrender.com/api/listing/getlisting/${fetchId}`)
     const data = await res.json()
     if(!data.success){
         setError(data.message)
@@ -122,7 +122,7 @@ function CreateListing() {
    try {
     setloading(true)
     setError(false)
-    const res = await fetch(`https://mern-estate10.onrender.com/api/listing/update/${Params.id}`,{
+    const res = await fetch(`https://mern-estate-sy31.onrender.com/api/listing/update/${Params.id}`,{
         method : "POST",
         headers : {
             'Content-Type':'application/json'

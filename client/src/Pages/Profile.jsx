@@ -41,7 +41,7 @@ function Profile() {
     e.preventDefault()
     try {
       dispatch(updateStart())
-      const res = await fetch(`https://mern-estate10.onrender.com/api/user/update/${currentuser._id}`,{
+      const res = await fetch(`https://mern-estate-sy31.onrender.com/api/user/update/${currentuser._id}`,{
         method : "POST",
         headers : {
           'Content-Type' : 'application/json',
@@ -60,7 +60,7 @@ function Profile() {
   const deleteUser = async(e)=>{
       try {
         dispatch(deleteStart())
-        const res = await fetch(`https://mern-estate10.onrender.com/api/user/delete/${currentuser._id}`,{
+        const res = await fetch(`https://mern-estate-sy31.onrender.com/api/user/delete/${currentuser._id}`,{
           method : "DELETE",
         })
         const data = await res.json()
@@ -74,7 +74,7 @@ function Profile() {
   const signOutUser = async(e)=>{
     try {
       dispatch(deleteStart())
-      const res = await fetch(`https://mern-estate10.onrender.com/api/user/signOut/${currentuser._id}`)
+      const res = await fetch(`https://mern-estate-sy31.onrender.com/api/user/signOut/${currentuser._id}`)
       const data = await res.json()
       console.log(data)
       if(data.success == false)return dispatch(deleteFailure(data.message))
@@ -85,7 +85,7 @@ function Profile() {
   }
   const showListing = async(e)=>{
     try {
-      const res = await fetch(`https://mern-estate10.onrender.com/api/user/listing/${currentuser._id}`)
+      const res = await fetch(`https://mern-estate-sy31.onrender.com/api/user/listing/${currentuser._id}`)
       const data = await res.json()
       if(data.success == false){
         return dispatch(deleteFailure(data.message))
@@ -98,7 +98,7 @@ function Profile() {
   }
   const deletelisting = async(id)=>{
       try {
-        const res = await fetch(`https://mern-estate10.onrender.com/api/listing/delete/${id}`,
+        const res = await fetch(`https://mern-estate-sy31.onrender.com/api/listing/delete/${id}`,
         {method:"DELETE"})
       } catch (error) {
         console.log(error)
