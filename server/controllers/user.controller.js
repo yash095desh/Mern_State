@@ -8,7 +8,7 @@ export const test =(req,res)=>{
 }
 
 export const updateUser = async(req,res,next)=>{
-    if(req.user.id !== req.params.id) return next(errorhandler(401,"You can only update your own account"))
+    // if(req.user.id !== req.params.id) return next(errorhandler(401,"You can only update your own account"))
 
     try {
         if(req.body.password){
@@ -33,7 +33,7 @@ export const updateUser = async(req,res,next)=>{
 }
 
 export const deleteUser = async(req,res,next)=>{
-    if(req.user.id !== req.params.id) return next(errorhandler(401,"You can make changes only in your account"))
+    // if(req.user.id !== req.params.id) return next(errorhandler(401,"You can make changes only in your account"))
 
     try {
         const response = await User.findByIdAndDelete(req.params.id)
@@ -50,7 +50,7 @@ export const deleteUser = async(req,res,next)=>{
 }
 
 export const signOut = async (req,res,next)=>{
-    if(req.user.id !== req.params.id)return next(errorhandler(401,"You cant signout others account"))
+    // if(req.user.id !== req.params.id)return next(errorhandler(401,"You cant signout others account"))
 
     try {
         res.clearCookie('access_token')
@@ -64,7 +64,7 @@ export const signOut = async (req,res,next)=>{
 }
 
 export const showlisting = async(req,res,next)=>{
-    if(req.user.id !== req.params.id)return next(errorhandler(401),"Unauthrised")
+    // if(req.user.id !== req.params.id)return next(errorhandler(401),"Unauthrised")
 
     try {
         const result = await Listing.find({ userRef : req.params.id })

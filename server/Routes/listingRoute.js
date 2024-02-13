@@ -5,9 +5,9 @@ import { createListing, deleteListing, fetchListing, getlistings, updateListing 
 
 const router = express.Router()
 
-router.post('/create',validateuser,createListing)
-router.delete('/delete/:id',validateuser,deleteListing)
-router.post('/update/:id',validateuser,updateListing)
+router.post('/create',createListing)
+router.delete('/delete/:id',deleteListing)
+router.post('/update/:id',updateListing)
 router.get('/getlisting/:id',fetchListing)
 router.get('/get',getlistings)
 
