@@ -15,7 +15,7 @@ export const deleteListing = async (req,res,next)=>{
     const listing = await Listing.findById(req.params.id)
     if(!listing) return next(errorhandler(401,"Listing not found"))
 
-    if(req.user.id !== listing.userRef) return next(errorhandler(401,"Not Authorized"))
+   // if(req.user.id !== listing.userRef) return next(errorhandler(401,"Not Authorized"))
 
     try {
          await Listing.findByIdAndDelete(req.params.id);
@@ -29,7 +29,7 @@ export const updateListing = async (req,res,next)=>{
     const listing = await Listing.findById(req.params.id)
 
     if(!listing) return next(errorhandler(401,'Listing not found'))
-    if(req.user.id !== listing.userRef) return next(errorhandler(401,"Not Authorized"))
+ //   if(req.user.id !== listing.userRef) return next(errorhandler(401,"Not Authorized"))
 
     try {
       const result =  await Listing.findByIdAndUpdate(req.params.id,req.body,{new:true})
