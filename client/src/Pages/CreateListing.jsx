@@ -108,7 +108,7 @@ function CreateListing() {
    try {
     setloading(true)
     setError(false)
-    const res = await fetch('https://mern-estate-sy31.onrender.com/api/listing/create',{
+    const res = await fetch('https://mern-estate10.onrender.com/api/listing/create',{
         method : "POST",
         headers : {
             'Content-Type':'application/json'

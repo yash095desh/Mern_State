@@ -88,7 +88,7 @@ function Search() {
       setshowMore(false)
       setloading(true)
       const searchQuery = urlParams.toString();
-      const res = await fetch(`https://mern-estate-sy31.onrender.com/api/listing/get?${searchQuery}`);
+      const res = await fetch(`https://mern-estate10.onrender.com/api/listing/get?${searchQuery}`);
       const data = await res.json();
       const newdata = data.filter((value)=>Object.keys(value).length !== 0)
       setlisting(newdata)
@@ -109,7 +109,7 @@ function Search() {
       const urlParams = new URLSearchParams(location.search)
       urlParams.set('startIndex',listing.length)
       const searchparams = urlParams.toString()
-      const res = await fetch(`https://mern-estate-sy31.onrender.com/api/listing/get?${searchparams}`)
+      const res = await fetch(`https://mern-estate10.onrender.com/api/listing/get?${searchparams}`)
       const data = await res.json()
       const newdata = data.filter((value)=>Object.keys(value).length !== 0)
       console.log(newdata)

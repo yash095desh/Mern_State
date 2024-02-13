@@ -14,7 +14,7 @@ function OAuth() {
 
             const result = await signInWithPopup(auth,provider)
             console.log(result)
-            const res = await fetch('https://mern-estate-sy31.onrender.com/api/auth/google',{
+            const res = await fetch('https://mern-estate10.onrender.com/api/auth/google',{
                 method : 'POST',
                 headers : {
                     'Content-Type':'application/json',

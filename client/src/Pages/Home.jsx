@@ -15,7 +15,7 @@ function Home() {
   useEffect(()=>{
     const fetchoffer =async()=>{
       try {
-      const res = await fetch(`https://mern-estate-sy31.onrender.com/api/listing/get?limit=4&offer=true`)
+      const res = await fetch(`https://mern-estate10.onrender.com/api/listing/get?limit=4&offer=true`)
       const data = await res.json()
       console.log(data)
       setofferlisting(data)
@@ -26,7 +26,7 @@ function Home() {
     }
     const fetchrent = async()=>{
       try {
-        const res = await fetch ('https://mern-estate-sy31.onrender.com/api/listing/get?type=rent&limit=4')
+        const res = await fetch ('https://mern-estate10.onrender.com/api/listing/get?type=rent&limit=4')
       const data = await res.json()
       console.log(data)
       setrentlisting(data)
@@ -37,7 +37,7 @@ function Home() {
     }
     const fetchsale =async()=>{
       try {
-        const res = await fetch ('https://mern-estate-sy31.onrender.com/api/listing/get?type=sale&limit=4')
+        const res = await fetch ('https://mern-estate10.onrender.com/api/listing/get?type=sale&limit=4')
         const data = await res.json()
         console.log(data)
         setSaleslisting(data)
